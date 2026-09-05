@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  color: #f5f5f5;
+}
+
+/* Headings with luxury serif font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.5px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-white font-semibold hover:from-gold-700 hover:to-gold-600 transition-all duration-300 rounded-none tracking-wider uppercase text-sm shadow-2xl hover:shadow-gold-500/50;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 bg-transparent border-2 border-gold-600 text-gold-600 font-semibold hover:bg-gold-600 hover:text-white transition-all duration-300 rounded-none tracking-wider uppercase text-sm;
+  }
+
+  .price-display {
+    @apply text-4xl font-bold bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+  }
+
+  .product-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8;
+  }
+
+  .luxury-heading {
+    @apply text-5xl md:text-6xl font-black tracking-tight bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent;
+  }
+
+  .luxury-subheading {
+    @apply text-xl text-gray-400 tracking-wide font-light;
+  }
+
+  .product-image-container {
+    @apply relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-none overflow-hidden group;
+  }
+
+  .product-image-wrapper {
+    @apply aspect-square overflow-hidden relative;
+  }
+
+  .product-image {
+    @apply w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out;
+  }
+}
+
+/* Scrollbar styling - luxury dark theme */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d4af37 0%, #b8941f 100%);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e5c158 0%, #d4af37 100%);
+}
+
+/* Smooth gradient backgrounds */
+.gradient-dark {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
+}
+
+.gradient-luxury {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+/* Gold accent line */
+.gold-line {
+  @apply h-1 bg-gradient-to-r from-transparent via-gold-600 to-transparent;
+}
+
+/* Luxury card effect */
+.luxury-card {
+  @apply bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-none shadow-2xl hover:shadow-gold-500/20 transition-all duration-500;
+}
+
+/* Image hover effect for galleries */
+.image-zoom {
+  @apply transition-transform duration-500 ease-out cursor-zoom-in hover:scale-105;
+}
+
+/* Luxury text gradient */
+.text-gold-gradient {
+  @apply bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent;
+}

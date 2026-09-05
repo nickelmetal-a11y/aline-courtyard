@@ -1,0 +1,40 @@
+{
+  "name": "aline-ecommerce",
+  "version": "1.0.0",
+  "description": "Aline Courtyard B2C Ecommerce - Handcrafted Gifts & Festive Collections",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:setup": "npx prisma migrate dev --name init",
+    "db:seed": "node prisma/seed.js",
+    "db:studio": "npx prisma studio"
+  },
+  "keywords": [
+    "ecommerce",
+    "gifts",
+    "handicrafts",
+    "festive",
+    "spiritual"
+  ],
+  "author": "Aline Design Pvt Ltd",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^7.10.0",
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "autoprefixer": "^10.5.5",
+    "axios": "^1.20.0",
+    "next": "^16.3.4",
+    "next-auth": "^4.24.15",
+    "postcss": "^8.5.28",
+    "prisma": "^8.0.0-rc.13",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
+  }
+}

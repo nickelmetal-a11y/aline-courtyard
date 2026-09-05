@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id              String    @id @default(cuid())
+  name            String    @unique
+  description     String    @db.Text
+  category        String
+  material        String
+  colors          String[]
+  wholesalePrice  Float     @db.Decimal(10, 2)
+  image           String?
+  images          String[]
+  moq             Int       @default(1)
+  stock           Int       @default(0)
+  featured        Boolean   @default(false)
+  contents        String?   // For gift box combos
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  cartItems       CartItem[]
+  orderItems      OrderItem[]
+}
+
+model Cart {
+  id              String    @id @default(cuid())
+  sessionId       String    @unique
+  items           CartItem[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model CartItem {
+  id              String    @id @default(cuid())
+  cart            Cart      @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId          String
+  product         Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId       String
+  quantity        Int       @default(1)
+  color           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([cartId, productId, color])
+}
+
+model Order {
+  id              String    @id @default(cuid())
+  orderNumber     String    @unique
+  customerEmail   String
+  customerPhone   String
+  shippingAddress String    @db.Text
+  billingAddress  String?   @db.Text
+  subtotal        Float     @db.Decimal(10, 2)
+  shipping        Float     @db.Decimal(10, 2)
+  tax             Float     @db.Decimal(10, 2)
+  total           Float     @db.Decimal(10, 2)
+  status          String    @default("pending") // pending, confirmed, shipped, delivered, cancelled
+  paymentStatus   String    @default("pending") // pending, completed, failed
+  razorpayOrderId String?
+  razorpayPaymentId String?
+  notes           String?   @db.Text
+  items           OrderItem[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+
+  @@index([customerEmail])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id              String    @id @default(cuid())
+  order           Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId         String
+  product         Product   @relation(fields: [productId], references: [id])
+  productId       String
+  quantity        Int
+  price           Float     @db.Decimal(10, 2) // Retail price at time of order
+  color           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Category {
+  id              String    @id @default(cuid())
+  name            String    @unique
+  slug            String    @unique
+  description     String?   @db.Text
+  image           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
