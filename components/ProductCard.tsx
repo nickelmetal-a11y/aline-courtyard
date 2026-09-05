@@ -35,8 +35,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               }}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-black text-gold-600 text-6xl">
-              ✨
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-black text-gold-600 text-3xl font-bold">
+              ◆
             </div>
           )}
 
@@ -53,12 +53,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="absolute top-6 left-6 space-y-3">
             {product.featured && (
               <div className="bg-black/60 backdrop-blur-sm border border-gold-500/50 text-gold-400 px-4 py-2 rounded-none text-xs uppercase font-bold tracking-widest">
-                ⭐ Featured
+                Featured
               </div>
             )}
             {isLowStock && (
               <div className="bg-red-900/60 backdrop-blur-sm border border-red-500/50 text-red-300 px-4 py-2 rounded-none text-xs uppercase font-bold tracking-widest">
-                ⚠ Limited
+                Limited Stock
               </div>
             )}
           </div>
@@ -122,7 +122,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   : 'bg-gray-700 text-gray-400'
               }`}
             >
-              {product.stock > 0 ? '✨ View & Shop' : 'Unavailable'}
+              {product.stock > 0 ? 'View & Shop' : 'Unavailable'}
             </button>
           </div>
         </div>

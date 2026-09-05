@@ -18,7 +18,7 @@ export default function Home() {
         <div className="section-container text-center relative z-10">
           <div className="mb-8">
             <p className="text-gold-400 uppercase tracking-widest text-sm font-semibold mb-6">
-              ✨ Handcrafted Excellence
+              Handcrafted Excellence
             </p>
             <h1 className="luxury-heading text-6xl md:text-7xl xl:text-8xl mb-8 leading-tight">
               Elevated
@@ -72,8 +72,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Festive */}
             <Link href="/products?category=festive" className="luxury-card p-8 text-center group cursor-pointer">
-              <div className="text-6xl mb-6 group-hover:scale-125 transition-transform duration-300">
-                🎉
+              <div className="text-4xl font-bold text-gold-400 mb-6 group-hover:scale-125 transition-transform duration-300">
+                ◆
               </div>
               <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
                 Festive Collections
@@ -88,8 +88,8 @@ export default function Home() {
 
             {/* Spiritual */}
             <Link href="/products?category=spiritual" className="luxury-card p-8 text-center group cursor-pointer">
-              <div className="text-6xl mb-6 group-hover:scale-125 transition-transform duration-300">
-                🙏
+              <div className="text-4xl font-bold text-gold-400 mb-6 group-hover:scale-125 transition-transform duration-300">
+                ◆
               </div>
               <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
                 Spiritual Sets
@@ -104,8 +104,8 @@ export default function Home() {
 
             {/* Gift Combos */}
             <Link href="/products?category=gifts" className="luxury-card p-8 text-center group cursor-pointer">
-              <div className="text-6xl mb-6 group-hover:scale-125 transition-transform duration-300">
-                🎁
+              <div className="text-4xl font-bold text-gold-400 mb-6 group-hover:scale-125 transition-transform duration-300">
+                ◆
               </div>
               <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
                 Premium Gift Sets
@@ -167,7 +167,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="luxury-card p-8 text-center">
-              <div className="text-5xl mb-6">🎨</div>
+              <div className="text-5xl font-bold text-gold-400 mb-6">●</div>
               <h3 className="text-xl font-bold text-white mb-3">Artisan Crafted</h3>
               <p className="text-gray-400 font-light">
                 Each piece handcrafted by master artisans with decades of expertise and dedication.
@@ -175,7 +175,7 @@ export default function Home() {
             </div>
 
             <div className="luxury-card p-8 text-center">
-              <div className="text-5xl mb-6">💎</div>
+              <div className="text-5xl font-bold text-gold-400 mb-6">●</div>
               <h3 className="text-xl font-bold text-white mb-3">Premium Materials</h3>
               <p className="text-gray-400 font-light">
                 Pure brass, marble, ceramics, and stone sourced for superior quality and durability.
@@ -183,7 +183,7 @@ export default function Home() {
             </div>
 
             <div className="luxury-card p-8 text-center">
-              <div className="text-5xl mb-6">🌍</div>
+              <div className="text-5xl font-bold text-gold-400 mb-6">●</div>
               <h3 className="text-xl font-bold text-white mb-3">Free Shipping</h3>
               <p className="text-gray-400 font-light">
                 Complimentary delivery on orders over ₹3000. Secure packaging for safe arrival.
@@ -191,7 +191,7 @@ export default function Home() {
             </div>
 
             <div className="luxury-card p-8 text-center">
-              <div className="text-5xl mb-6">✨</div>
+              <div className="text-5xl font-bold text-gold-400 mb-6">●</div>
               <h3 className="text-xl font-bold text-white mb-3">Concierge Support</h3>
               <p className="text-gray-400 font-light">
                 Dedicated customer care available 24/7 with hassle-free returns and exchanges.
