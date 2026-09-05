@@ -103,55 +103,75 @@ export default function CheckoutPage() {
     setIsProcessing(true);
 
     try {
-      // Simulate order placement
-      // In production, this would call your Razorpay API
-      const orderData = {
-        customer: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
+      const cartTotal = calculateCartTotal(cartItems.map(item => ({
+        id: item.id,
+        wholesalePrice: item.wholesalePrice,
+        quantity: item.quantity,
+      })));
+
+      // Create Razorpay order
+      const razorpayResponse = await fetch('/api/razorpay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: cartTotal.total,
+          currency: 'INR',
+          receipt: `order_${Date.now()}`,
+          notes: {
+            customer_name: `${formData.firstName} ${formData.lastName}`,
+            customer_email: formData.email,
+            customer_phone: formData.phone,
+          },
+        }),
+      });
+
+      const razorpayOrder = await razorpayResponse.json();
+
+      if (!razorpayOrder.id) {
+        throw new Error('Failed to create payment order');
+      }
+
+      // Razorpay options
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: razorpayOrder.amount,
+        currency: razorpayOrder.currency,
+        order_id: razorpayOrder.id,
+        name: 'Aline Courtyard',
+        description: `${cartItems.length} items`,
+        prefill: {
+          name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
-          phone: formData.phone,
+          contact: formData.phone,
         },
-        shippingAddress: {
-          street: formData.streetAddress,
-          city: formData.city,
-          state: formData.state,
-          pincode: formData.pincode,
+        handler: async (response: any) => {
+          // Payment successful - save order
+          localStorage.removeItem('cart');
+          setOrderPlaced(true);
+
+          setTimeout(() => {
+            window.location.href = '/order-success';
+          }, 2000);
         },
-        billingAddress: formData.sameAsBilling
-          ? {
-              street: formData.streetAddress,
-              city: formData.city,
-              state: formData.state,
-              pincode: formData.pincode,
-            }
-          : {
-              street: formData.billingStreet || '',
-              city: formData.billingCity || '',
-              state: formData.billingState || '',
-              pincode: formData.billingPincode || '',
-            },
-        items: cartItems,
-        totals: cartTotal,
+        modal: {
+          ondismiss: () => {
+            setIsProcessing(false);
+          },
+        },
       };
 
-      console.log('Order Data:', orderData);
-
-      // Simulate success
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Clear cart and show success
-      localStorage.removeItem('cart');
-      setOrderPlaced(true);
-
-      // Redirect after 2 seconds
-      setTimeout(() => {
-        window.location.href = '/order-success';
-      }, 2000);
+      // Load and trigger Razorpay
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => {
+        const Razorpay = (window as any).Razorpay;
+        const rzp = new Razorpay(options);
+        rzp.open();
+      };
+      document.body.appendChild(script);
     } catch (error) {
-      console.error('Order placement failed:', error);
-      setErrors({ submit: 'Failed to place order. Please try again.' });
-    } finally {
+      console.error('Payment processing failed:', error);
+      setErrors({ submit: 'Payment processing failed. Please try again.' });
       setIsProcessing(false);
     }
   };
@@ -366,7 +386,7 @@ export default function CheckoutPage() {
                 disabled={isProcessing}
                 className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-lg py-4"
               >
-                {isProcessing ? 'Processing...' : '🔒 Place Order & Pay with Razorpay'}
+                {isProcessing ? 'Processing...' : 'Complete Payment with Razorpay'}
               </button>
 
               {/* Back to Cart */}
