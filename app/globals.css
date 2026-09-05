@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+:root {
+  --gold-300: #e5c158;
+  --gold-400: #d4af37;
+  --gold-500: #d4af37;
+  --gold-600: #c29c1f;
+  --gold-700: #9f7c1f;
+}
 
 * {
   margin: 0;
@@ -22,55 +28,204 @@ body {
   color: #f5f5f5;
 }
 
-/* Headings with luxury serif font */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
   letter-spacing: -0.5px;
 }
 
-@layer components {
-  .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-white font-semibold hover:from-gold-700 hover:to-gold-600 transition-all duration-300 rounded-none tracking-wider uppercase text-sm shadow-2xl hover:shadow-gold-500/50;
-  }
+.btn-primary {
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, var(--gold-600), var(--gold-500));
+  color: white;
+  font-weight: 600;
+  transition: all 300ms;
+  border-radius: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
 
-  .btn-secondary {
-    @apply px-8 py-4 bg-transparent border-2 border-gold-600 text-gold-600 font-semibold hover:bg-gold-600 hover:text-white transition-all duration-300 rounded-none tracking-wider uppercase text-sm;
-  }
+.btn-primary:hover {
+  background: linear-gradient(to right, var(--gold-700), var(--gold-600));
+  box-shadow: 0 20px 25px -5px var(--gold-500);
+}
 
-  .price-display {
-    @apply text-4xl font-bold bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent;
-  }
+.btn-secondary {
+  padding: 1rem 2rem;
+  background: transparent;
+  border: 2px solid var(--gold-600);
+  color: var(--gold-600);
+  font-weight: 600;
+  transition: all 300ms;
+  border-radius: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
 
+.btn-secondary:hover {
+  background: var(--gold-600);
+  color: white;
+}
+
+.price-display {
+  font-size: 2.25rem;
+  font-weight: bold;
+  background: linear-gradient(to right, var(--gold-400), var(--gold-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
-  }
-
-  .product-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8;
-  }
-
-  .luxury-heading {
-    @apply text-5xl md:text-6xl font-black tracking-tight bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent;
-  }
-
-  .luxury-subheading {
-    @apply text-xl text-gray-400 tracking-wide font-light;
-  }
-
-  .product-image-container {
-    @apply relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-none overflow-hidden group;
-  }
-
-  .product-image-wrapper {
-    @apply aspect-square overflow-hidden relative;
-  }
-
-  .product-image {
-    @apply w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
-/* Scrollbar styling - luxury dark theme */
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.luxury-heading {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(to right, var(--gold-400), var(--gold-300), var(--gold-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (min-width: 768px) {
+  .luxury-heading {
+    font-size: 3.75rem;
+  }
+}
+
+.luxury-subheading {
+  font-size: 1.25rem;
+  color: #9ca3af;
+  letter-spacing: 0.05em;
+  font-weight: 300;
+}
+
+.product-image-container {
+  position: relative;
+  background: linear-gradient(to bottom right, #111827, #1f2937, #000);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.product-image-container.group:hover .product-image {
+  transform: scale(1.1);
+}
+
+.product-image-wrapper {
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group {
+  position: relative;
+}
+
+.gold-line {
+  height: 0.25rem;
+  background: linear-gradient(to right, transparent, var(--gold-600), transparent);
+}
+
+.luxury-card {
+  background: linear-gradient(to bottom right, #111827, #000);
+  border: 1px solid #1f2937;
+  border-radius: 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: all 500ms;
+}
+
+.luxury-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.2);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(to right, var(--gold-400), var(--gold-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-dark {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
+}
+
+.gradient-luxury {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+.image-zoom {
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: zoom-in;
+}
+
+.image-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -86,33 +241,4 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #e5c158 0%, #d4af37 100%);
-}
-
-/* Smooth gradient backgrounds */
-.gradient-dark {
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
-}
-
-.gradient-luxury {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
-}
-
-/* Gold accent line */
-.gold-line {
-  @apply h-1 bg-gradient-to-r from-transparent via-gold-600 to-transparent;
-}
-
-/* Luxury card effect */
-.luxury-card {
-  @apply bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-none shadow-2xl hover:shadow-gold-500/20 transition-all duration-500;
-}
-
-/* Image hover effect for galleries */
-.image-zoom {
-  @apply transition-transform duration-500 ease-out cursor-zoom-in hover:scale-105;
-}
-
-/* Luxury text gradient */
-.text-gold-gradient {
-  @apply bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent;
 }

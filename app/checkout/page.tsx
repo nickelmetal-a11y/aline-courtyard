@@ -5,6 +5,12 @@ import Link from 'next/link';
 import { calculateCartTotal, CartItem as CartItemType, formatPrice } from '@/lib/pricing';
 import PricingBreakdown from '@/components/Checkout/PricingBreakdown';
 
+interface CartProduct extends CartItemType {
+  name: string;
+  image?: string;
+  color?: string;
+}
+
 interface FormData {
   firstName: string;
   lastName: string;
@@ -22,7 +28,7 @@ interface FormData {
 }
 
 export default function CheckoutPage() {
-  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
+  const [cartItems, setCartItems] = useState<CartProduct[]>([]);
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
