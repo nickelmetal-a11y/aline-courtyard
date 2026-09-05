@@ -215,14 +215,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               </div>
             )}
 
-            {/* Gift Box Info */}
-            {product.contents && (
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-sm font-semibold text-blue-900 mb-2">📦 Gift Box Contents</p>
-                <p className="text-sm text-blue-800">{product.contents}</p>
-              </div>
-            )}
-
             {/* Continue Shopping */}
             <Link href="/products" className="btn-secondary block text-center">
               Continue Shopping
